@@ -1,0 +1,14 @@
+{% extends "star_ratings/widget_base.html" %}
+{% block rating_detail %}
+
+    {% if not user.is_authenticated %}
+    <div>
+        <a href="{% url 'login' %}">
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+                برای رای دادن باید وارد شوید
+            </button>
+        </a>
+    </div>
+    {% endif %}
+    
+{% endblock %}
