@@ -106,7 +106,7 @@ ul ul ul li {
   right: 95px;
 }
 
-/* .popular_articles {
+.popular_articles {
   margin-bottom: 20px;
   border: 1px solid #bfbfbf;
   padding: 15px;
@@ -114,24 +114,10 @@ ul ul ul li {
   box-shadow: -5px 5px #d5d5d5;
   left: 70px;
   position: absolute;
-  width: 240px;
-  top: 600px;
+  width: 280px;
+  top: 650px;
   font-family: Sahel;
   background-color: #fff;
-} */
-
-
-#hot_articles {
-  margin-bottom: 20px;
-  border: 1px solid #bfbfbf;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: -5px 5px #d5d5d5;
-  right: 100px;
-  position: absolute;
-  width: 240px;
-  top: 600px;
-  font-family: Sahel;
 }
 
 #maghalat {
@@ -191,8 +177,15 @@ ul ul ul li {
 
 .slider-image{
   width: 100%;
-  width: 100%;
+  height: auto;
   object-fit: cover;
 }
 
 
+#backtoup{
+  width:40px;
+  height:40px;
+  right:10px; 
+  bottom:10px;
+   
+}

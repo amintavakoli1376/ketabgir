@@ -1,10 +1,22 @@
+{%load humanize %}
+
 <div class="popular_articles d-none d-xl-block">
     <h2 class="h4">{{title}}</h2>
     <hr>
-    {% for a in articles %}
-        <div class="nav nav-list">
-            <a href="{% url 'blog:detail' a.slug %}">{{a.title}}</a>
+    {% for article in articles %}
+    
+        <div class="row">
+            <div class="nav nav-list d-inline col-4">
+                <a href="{% url 'blog:detail' article.slug %}" class="d-inline">
+                    <img src="{{article.thumbnail.url}}" width="60" height="60" class="img-fluid rounded-start">
+                </a>
+            </div>
+            <div class="d-inline col-8 justify-content-end">
+                <a href="{% url 'blog:detail' article.slug %}" class="px-2 py-2 d-flex">{{article.title}}</a>
+                <p class="d-inline text-muted">{{article.publish|naturaltime}}</p>
+            </div>
         </div>
+        <hr>
     {% endfor %}
 </div>
 

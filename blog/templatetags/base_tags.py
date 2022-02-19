@@ -21,7 +21,7 @@ def category_navbar():
 def popular_articles():
     last_month = datetime.today()-timedelta(days=30)
     return {
-        "articles": Article.objects.published().annotate(count=Count('hits',filter=Q(articlehit__created__gt=last_month))).order_by('-count','-publish')[:5],
+        "articles": Article.objects.published().annotate(count=Count('hits',filter=Q(articlehit__created__gt=last_month))).order_by('count','publish')[:4],
         "title":"مقالات پربازدید ماه"
     }
     
