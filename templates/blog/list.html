@@ -43,26 +43,34 @@
 
 <div class="px-4 px-lg-5 py-4">
     <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="col-md-12 col-lg-8 col-xl-7 gx-4">
             <!-- Post preview-->
             {% block header %}{% endblock header %}
 
            <h2 class="text-center text-muted display-5 mt-1">پست های اخیر</h2>
            <div class="py-4">
                 <main>
-                    <div class="row">
+                    <div class="row ">
                         {% for article in object_list|slice:":3" %}
-                            <div class="col-lg-4" style="max-width:100%; height:auto;">
+                            <div class="col-lg-4 rounded" style="max-width:100%; height:auto;">
                                 <div class="card mb-3" style="width:250px; height:650px;">
-                                    <img src="{{article.thumbnail.url}}" class="card-img-top px-3 py-1" alt="...">
+                                    <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-4">{{article.title}}</h5>
+                                        <a href="{% url 'blog:detail' article.slug %}">
+                                            <h4 class="card-title mb-4">{{article.title}}</h4>
+                                            {% if article.is_special %}
+                                                <span style="font-size:14px;color:red;">ویژه</span>
+                                            {% endif %}
+                                        </a>
                                         <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
                                             <a href="{% url 'blog:detail' article.slug %}">بیشتربخوانید...</a>
                                         </p>
+                                        
                                     </div>
+                                    
                                     <div class="card-footer">
-                                    <small class="text-muted">{{article.jpublish}}</small>
+                                    <small class="text-muted">{{article.publish|naturaltime}}</small>
+                                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
                                     </div>
                                 </div>
                             </div>
