@@ -6,39 +6,9 @@
 
 {% block main %}
 
-<!-- slide-->
+<!-- Slider -->
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
-    </div>
-    <div class="carousel-inner py-3">
-        {% for article in object_list|slice:":3" %}
-          
-            <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %} ">
-              <div><img src="{{article.thumbnail.url}}" class="rounded float-start py-1" max-width="100%" height="500px"></div>
-              <div class="container">
-                <div class="carousel-caption text-end">
-                  <h1>{{article.title}}</h1>
-                  <p>{{article.description|striptags|truncatewords:10}}</p>
-                  <p><a class="btn btn-lg btn-primary rounded" href="{% url 'blog:detail' article.slug %}">بیشتر بخوانید</a></p>
-                </div>
-              </div>
-            </div>
-            
-        {% endfor %}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-</div>
+<div class="">{% hot_articles %}</div>
 
 
 <div class="px-4 px-lg-5 py-4">
@@ -54,8 +24,10 @@
                         {% for article in object_list|slice:":3" %}
                             <div class="col-lg-4 rounded" style="max-width:100%; height:auto;">
                                 <div class="card mb-3" style="width:250px; height:650px;">
-                                    <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
-                                    <div class="card-body">
+                                    <a href="{% url 'blog:detail' article.slug %}">
+                                        <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
+                                    </a>
+                                        <div class="card-body">
                                         <a href="{% url 'blog:detail' article.slug %}">
                                             <h4 class="card-title mb-4">{{article.title}}</h4>
                                             {% if article.is_special %}
@@ -82,44 +54,8 @@
            </div>
 
 
-            <div>
-                {% for article in object_list %}
-                <div class="post-preview shadow p-3 mb-5 bg-body rounded">
-                    <a href="{% url 'blog:detail' article.slug %}">
-                        <h2 class="post-title" style="font-family:Sahel;">
-                            {{article.title}}
-                            {% if article.is_special %}
-                                <span style="font-size:14px;color:red;">ویژه</span>
-                            {% endif %}   
-                        </h2>
-                        <!-- <div>{% ratings article %}</div> -->
-                    </a>
-                    <!-- <img src="{{article.thumbnail.url}}" width="120"> -->
-                    <p class="post-subtitle text-muted">{{article.description|striptags|truncatewords:40|slice:"-2"}}
-                        <a href="{% url 'blog:detail' article.slug %}">بیشتربخوانید...</a>
-                    </p>
-                    
-                    <p class="post-meta text-black-50">
-                        نوشته شده توسط
-                        <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
-                        {{article.jpublish}}
-                        <div>
-                            {% for cat in article.category.active %}
-                                <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
-                            {% endfor %}
-                        </div>
-                        <div>بازدیدها:{{article.hits.count}}</div>
-                    </p>
-                </div>
-                <!-- Divider-->
-                <hr class="my-4" />
-            {% empty %}
-                <p>محتوایی برای نمایش وجود ندارد.</p>
-            {% endfor %}
-            </div>
-
             <!-- Pager-->
-                {% if is_paginated %}
+                <!-- {% if is_paginated %}
                     <div class="d-flex justify-content-end mb-4">
                         {% if page_obj.has_previous %}
                             <a class="btn btn-primary text-uppercase mx-3" href="{% block previous_page_url %}{% endblock %}">پست های جدید &rarr;</a>
@@ -128,7 +64,7 @@
                             <a class="btn btn-primary text-uppercase" href="{% block next_page_url %}{% endblock %}">پست های قدیمی &larr;</a>
                         {% endif %} 
                     </div>
-                {% endif %}
+                {% endif %} -->
             </div>
         </div>
     </div>

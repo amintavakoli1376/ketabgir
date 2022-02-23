@@ -25,12 +25,12 @@ def popular_articles():
         "title":"مقالات پربازدید ماه"
     }
     
-@register.inclusion_tag("blog/partials/sidebar.html")
+@register.inclusion_tag("blog/partials/slider.html")
 def hot_articles():
     content_type_id = user_type = ContentType.objects.get(app_label='blog', model='article').id
     last_month = datetime.today()-timedelta(days=30)
     return {
-        "articles": Article.objects.published().annotate(count=Count('comments',filter=Q(comments__posted__gt=last_month) and Q(comments__content_type_id= content_type_id))).order_by('-count','-publish')[:5],
+        "articles": Article.objects.published().annotate(count=Count('comments',filter=Q(comments__posted__gt=last_month) and Q(comments__content_type_id= content_type_id))).order_by('-count','-publish')[:3],
         "title":"مقالات داغ ماه"
     }
     
