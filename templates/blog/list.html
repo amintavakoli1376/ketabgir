@@ -42,8 +42,8 @@
 
 
 <div class="px-4 px-lg-5 py-4">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-12 col-lg-8 col-xl-7 gx-4">
+    <div class="row gx-lg-5 justify-content-center me-5">
+        <div class="col-md-4 col-lg-8 col-xl-12">
             <!-- Post preview-->
             {% block header %}{% endblock header %}
 
@@ -53,7 +53,7 @@
                     <div class="row ">
                         {% for article in object_list|slice:":3" %}
                             <div class="col-lg-4 rounded" style="max-width:100%; height:auto;">
-                                <div class="card mb-3" style="width:250px; height:650px;">
+                                <div class="card mb-3" id="postcard">
                                     <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
                                     <div class="card-body">
                                         <a href="{% url 'blog:detail' article.slug %}">
@@ -81,7 +81,7 @@
                 </main>
            </div>
 
-
+<!-- 
             <div>
                 {% for article in object_list %}
                 <div class="post-preview shadow p-3 mb-5 bg-body rounded">
@@ -92,9 +92,9 @@
                                 <span style="font-size:14px;color:red;">ویژه</span>
                             {% endif %}   
                         </h2>
-                        <!-- <div>{% ratings article %}</div> -->
+                        <div>{% ratings article %}</div>
                     </a>
-                    <!-- <img src="{{article.thumbnail.url}}" width="120"> -->
+                    <img src="{{article.thumbnail.url}}" width="120">
                     <p class="post-subtitle text-muted">{{article.description|striptags|truncatewords:40|slice:"-2"}}
                         <a href="{% url 'blog:detail' article.slug %}">بیشتربخوانید...</a>
                     </p>
@@ -111,12 +111,12 @@
                         <div>بازدیدها:{{article.hits.count}}</div>
                     </p>
                 </div>
-                <!-- Divider-->
+                
                 <hr class="my-4" />
             {% empty %}
                 <p>محتوایی برای نمایش وجود ندارد.</p>
             {% endfor %}
-            </div>
+            </div> -->
 
             <!-- Pager-->
                 {% if is_paginated %}
