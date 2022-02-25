@@ -18,7 +18,7 @@ def LikeView(request,slug):
 
 class ArticleList(ListView):
     queryset = Article.objects.published()
-    paginate_by = 4
+    paginate_by = 9
     
 class ArticleDetail(DetailView):
     def get_object(self):
@@ -45,7 +45,7 @@ class ArticlePreview(AuthorAccessMixin,DetailView):
         return get_object_or_404(Article, pk=pk)
 
 class CategoryList(ListView):
-    paginate_by = 4
+    paginate_by = 9
     template_name = "blog/category_list.html"
     
     def get_queryset(self):
@@ -60,7 +60,7 @@ class CategoryList(ListView):
         return context
     
 class AuthorList(ListView):
-    paginate_by = 4
+    paginate_by = 9
     template_name = "blog/author_list.html"
     
     def get_queryset(self):
@@ -75,7 +75,7 @@ class AuthorList(ListView):
         return context
     
 class SearchList(ListView):
-    paginate_by = 4
+    paginate_by = 9
     template_name = "blog/search_list.html"
     
     def get_queryset(self):
@@ -86,3 +86,7 @@ class SearchList(ListView):
         context = super().get_context_data(**kwargs)
         context["search"] = self.request.GET.get('q')
         return context
+    
+class AllPosts(ListView):
+    queryset = Article.objects.published()
+    paginate_by = 9

@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+
+<div class="px-4 px-lg-5 py-4">
+    <div class="row gx-lg-5 justify-content-center me-5">
+        <div class="col-md-4 col-lg-8">
+            <!-- Post preview-->
+            {% block header %}{% endblock header %}
+
+           <h2 class="text-center text-muted display-5 mt-1">پست ها</h2>
+           <div class="py-4">
+                <main>
+                    <div class="row">
+                        {% for article in object_list %}
+                            <div class="col-lg-4 rounded post-preview" style="max-width:100%; height:auto;">
+                                <div class="card mb-3" style="width:250px; height:650px;">
+                                    <a href="{% url 'blog:detail' article.slug %}">
+                                        <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
+                                    </a>
+                                        <div class="card-body">
+                                        <a href="{% url 'blog:detail' article.slug %}">
+                                            <h4 class="card-title mb-4">{{article.title}}</h4>
+                                            {% if article.is_special %}
+                                                <span style="font-size:14px;color:red;">ویژه</span>
+                                            {% endif %}
+                                        </a>
+                                        <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
+                                            <a href="{% url 'blog:detail' article.slug %}">بیشتربخوانید...</a>
+                                        </p>
+                                        
+                                    </div>
+                                    
+                                    <div class="card-footer">
+                                    <small class="text-muted">{{article.publish|naturaltime}}</small>
+                                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p>محتوایی برای نمایش وجود ندارد.</p>
+                        {% endfor %}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block previous_page_url %}
+    {% url 'blog:author' author.username page_obj.previous_page_number %}
+{% endblock %}
+
+{% block next_page_url %}
+    {% url 'blog:author' author.username page_obj.next_page_number %}
+{% endblock %}

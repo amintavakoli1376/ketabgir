@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ArticleList , ArticleDetail , CategoryList , AuthorList , ArticlePreview ,SearchList ,LikeView
+from .views import ArticleList , ArticleDetail , CategoryList , AuthorList , ArticlePreview ,SearchList ,LikeView ,AllPosts
 
 app_name = 'blog'
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('search/', SearchList.as_view() , name='search'),
     path('search/page/<int:page>', SearchList.as_view() , name='search'),
     path('like/<slug:slug>', LikeView , name='like_post'),
+    path('page/<int:page>',AllPosts.as_view(), name='posts'),
     
 ]
 
