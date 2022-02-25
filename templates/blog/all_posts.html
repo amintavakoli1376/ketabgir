@@ -1,12 +1,14 @@
 {% extends 'blog/base.html' %}
+{% load humanize %}
 
+{% block posts %}
 <div class="px-4 px-lg-5 py-4">
     <div class="row gx-lg-5 justify-content-center me-5">
         <div class="col-md-4 col-lg-8">
             <!-- Post preview-->
             {% block header %}{% endblock header %}
 
-           <h2 class="text-center text-muted display-5 mt-1">پست ها</h2>
+           <h2 class="text-center text-muted display-5 mt-5 py-4">پست ها</h2>
            <div class="py-4">
                 <main>
                     <div class="row">
@@ -44,11 +46,12 @@
         </div>
     </div>
 </div>
+{% endblock posts %}
 
 {% block previous_page_url %}
-    {% url 'blog:author' author.username page_obj.previous_page_number %}
+    {% url 'blog:home' author.username page_obj.previous_page_number %}
 {% endblock %}
 
 {% block next_page_url %}
-    {% url 'blog:author' author.username page_obj.next_page_number %}
+    {% url 'blog:home' author.username page_obj.next_page_number %}
 {% endblock %}

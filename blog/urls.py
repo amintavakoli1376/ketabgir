@@ -14,7 +14,7 @@ urlpatterns = [
     path('search/', SearchList.as_view() , name='search'),
     path('search/page/<int:page>', SearchList.as_view() , name='search'),
     path('like/<slug:slug>', LikeView , name='like_post'),
-    path('page/<int:page>',AllPosts.as_view(), name='posts'),
+    path('allposts', AllPosts.as_view(), name='posts'),
     
 ]
 

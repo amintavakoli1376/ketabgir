@@ -90,3 +90,4 @@ class SearchList(ListView):
 class AllPosts(ListView):
     queryset = Article.objects.published()
     paginate_by = 9
+    template_name = "blog/all_posts.html"
