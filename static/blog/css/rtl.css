@@ -12,6 +12,7 @@ body {
   font-family: "Sahel";
   font-size: 16px;
   background-color: #F9F7F7;
+  overflow-x: hidden;
 }
 .navbar-nav {
   margin-right: initial !important;
