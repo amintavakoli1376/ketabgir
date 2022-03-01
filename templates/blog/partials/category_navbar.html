@@ -7,7 +7,7 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link px-lg-3 py-3 " href="{% url 'blog:home' %}" id="maghalat">مقالات</a>
+        <a class="nav-link px-lg-3 py-3 " href="{% url 'blog:posts' %}" id="maghalat">وبلاگ</a>
         <ul>
           {% for cat in category %} {% if cat.parent == None %}
           <li class="nav-item" style="background-color: #112D4E;">
