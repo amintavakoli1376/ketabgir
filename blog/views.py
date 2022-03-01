@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from .models import Article , Category
 from django.db.models import Q
 from django.urls import reverse
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -91,3 +92,14 @@ class AllPosts(ListView):
     queryset = Article.objects.published()
     paginate_by = 9
     template_name = "blog/all_posts.html"
+    
+def contact(request):
+    if request.method == "POST":
+        message_name = request.POST['message-name']
+        message_email = request.POST['message-email']
+        message = request.POST['message']
+        
+        return render(request, 'blog/list.html', {'message_name':message_name})
+    
+    else:
+        return render(request, 'blog/list.html', {})
