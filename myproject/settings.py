@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'comment',
     'star_ratings',
     'django.contrib.humanize',
+    'newsletters',
 
 ]
 

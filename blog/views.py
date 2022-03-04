@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from .models import Article , Category
 from django.db.models import Q
 from django.urls import reverse
-from django.core.mail import send_mail
+
 
 
 # Create your views here.

@@ -1,0 +1,20 @@
+{% extends "blog/list.html" %}
+
+{% block newsletter_unsubscribe %}
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <h3 class="text-center">لفو اشتراک در خبرنامه وبلاگ کتاب گیر</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    {{form}}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">لغو اشتراک</button>
+                    </span>
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
+{% endblock newsletter_unsubscribe %}

@@ -115,21 +115,23 @@
             </div>
             </div>
             </div>
-            <div class="col-md-6">
-                <form class="bg-light p-4 rounded" action="{% url 'blog:home' %}" method="post">
-                    {% csrf_token %}
-                    <div class="mb-3 ">
+            {% block newslettersignup %} {% endblock newslettersignup %}
+            {% block newsletter_unsubscribe %}{% endblock newsletter_unsubscribe %}
+            <div class="col-md-6"> 
+                <!-- <form class="bg-light p-4 rounded" action="" method="POST">
+                    {% csrf_token %} -->
+                    <!-- <div class="mb-3 ">
                         <label for="contactFullname" class="form-label d-block">Fullname</label>
                         <input type="text" name="message-name" class="form-control d-block" id="contactFullname" placeholder="Amin Tavakoli">
-                    </div>
+                    </div> -->
                     <div class="mb-3">
                         <label for="contactEmail" class="form-label d-block">Email address</label>
                         <input type="email" name="message-email" class="form-control d-block" id="contactEmail" placeholder="name@example.com">
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="contactComment" class="form-label d-block">Your comment</label>
                         <textarea name="message" class="form-control d-block" id="contactComment" rows="6" cols="40"></textarea>
-                    </div>
+                    </div> -->
                     <button class="btn btn-primary" style="margin-bottom:30px;"></button>
                 </form>
             </div>

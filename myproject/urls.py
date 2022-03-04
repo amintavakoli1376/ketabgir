@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('comment/', include('comment.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('newsletter/', include('newsletters.urls'), name = 'newsletter'),
+    
 
     
 ]
