@@ -56,7 +56,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                   <span>نام کاربری</span>
-                  {{form.username|add_class:"form-control"}}
+                  {{form.username|add_class:"form-control"}} 
                    {% if form.username.errors %}
                     <div class="errors">
                       {% for error in form.username.errors %}

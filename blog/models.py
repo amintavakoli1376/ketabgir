@@ -100,3 +100,25 @@ class ArticleHit(models.Model):
     
 
 
+class NewsletterUser(models.Model):
+    email = models.EmailField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.email
+    
+class Newsletter(models.Model):
+    EMAIL_STATUS_CHOICES =(
+        ("draft", "پیش نویس"),
+        ("published", "منتشرشده"),
+    )
+    subject = models.CharField(max_length=250,verbose_name = "موضوع")
+    body = models.TextField(verbose_name = "متن")
+    email = models.ManyToManyField(NewsletterUser , verbose_name = "ایمیل")
+    status = models.CharField(max_length=10 ,choices=EMAIL_STATUS_CHOICES ,verbose_name = "وضعیت")
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.subject
+    

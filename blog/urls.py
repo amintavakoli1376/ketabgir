@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ArticleList , ArticleDetail , CategoryList , AuthorList , ArticlePreview ,SearchList ,LikeView ,AllPosts
+from .views import ArticleList , ArticleDetail , CategoryList , AuthorList ,ArticlePreview ,SearchList ,LikeView ,AllPosts , newsletter_signup, newsletter_unsubscribe
 
 app_name = 'blog'
 urlpatterns = [
@@ -15,6 +15,8 @@ urlpatterns = [
     path('search/page/<int:page>', SearchList.as_view() , name='search'),
     path('like/<slug:slug>', LikeView , name='like_post'),
     path('allposts', AllPosts.as_view(), name='posts'),
+    path('newsletter/sign_up', newsletter_signup , name='newsletter_signup'),
+    path('newsletter/unsubscribe', newsletter_unsubscribe , name='newsletter_unsubscribe'),
     
 ]
 

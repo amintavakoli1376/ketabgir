@@ -13,7 +13,7 @@ class ProfileForm(forms.ModelForm):
         if not user.is_superuser:
             self.fields['username'].disabled = True
             self.fields['email'].disabled = True
-            self.fields['special_user'].disabled = True
+            self.fields['special_user'].disabled = True 
             self.fields['is_author'].disabled = True
                 
     class Meta:

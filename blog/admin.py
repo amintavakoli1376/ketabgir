@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Category ,IPAddress
+from .models import Article, Category ,IPAddress , NewsletterUser , Newsletter
 
 #Admin header change
 admin.site.site_header = "مدیریت وبلاگ"
@@ -63,3 +63,12 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Article,ArticleAdmin)
 admin.site.register(IPAddress)
+
+
+
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email','date_added',)
+    
+admin.site.register(NewsletterUser,NewsletterAdmin)
+
+admin.site.register(Newsletter)

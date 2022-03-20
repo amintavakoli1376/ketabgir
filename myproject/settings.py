@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'comment',
     'star_ratings',
     'django.contrib.humanize',
-    'newsletters',
+
 
 ]
 
@@ -158,11 +158,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media',)
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'account.User'
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_USE_TLS = True
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = config('EMAIL_PORT')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 STAR_RATINGS_STAR_HEIGHT = 16
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'artdesign.saymodesign@gmail.com'
+EMAIL_HOST_PASSWORD = 'amin1376'
+EMAIL_USE_TLS = True
