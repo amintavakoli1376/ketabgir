@@ -103,16 +103,6 @@ class AllPosts(ListView):
     paginate_by = 9
     template_name = "blog/all_posts.html"
     
-# def contact(request):
-#     if request.method == "POST":
-#         message_name = request.POST['message-name']
-#         message_email = request.POST['message-email']
-#         message = request.POST['message']
-        
-#         return render(request, 'blog/list.html', {'message_name':message_name})
-    
-#     else:
-#         return render(request, 'blog/list.html', {})
     
     
 def newsletter_signup(request):
@@ -253,3 +243,24 @@ def control_newsletter_delete(request, pk):
     }
     template = 'registration/control_newsletter_delete.html'
     return render(request, template, context)
+
+
+def contact(request):
+    if request.method == "POST":
+        message_name = request.POST['message-name']
+        message_email = request.POST['message-email']
+        message = request.POST['message']
+        
+        # send an email
+        send_mail(
+           message_name , # subject
+           message , # message
+           message_email , # from email
+           ['artdesign.saymodesign@gmail.com'] , # To Email
+            
+        )
+        
+        return render(request, 'blog/contact.html', {'message_name':message_name})
+    
+    else:
+        return render(request, 'blog/contact.html', {})

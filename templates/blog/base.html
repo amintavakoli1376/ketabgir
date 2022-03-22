@@ -80,6 +80,12 @@
     {% block posts %}
       
     {% endblock posts %}
+
+    <!-- contact form -->
+
+    {% block contact %}
+  
+    {% endblock contact %}
   
     <!-- back to top -->
 
@@ -132,11 +138,7 @@
       <footer class="container pt-5">
         <div class="row py-4">
           <div class="col-md-3">
-            <h2 class="mb-5">Web Developers</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eaque natus ipsam non inventore, aliquid officiis facere temporibus ratione magni amet aspernatur cum sequi labore ea porro provident nihil soluta.</p>
-          </div>
-          <div class="col-md-3">
-            <h3 class="border-end border-4 border-primary pe-3">Pages</h3>
+            <h3 class="border-end border-4 border-primary pe-3 ">Pages</h3>
             <ul class="list-unstyled mt-4">
               <li><a href="#" class="text-decoration-none" style="color: #ddd;">Vue.js</a></li>
               <li><a href="#" class="text-decoration-none" style="color: #ddd;">React.js</a></li>
@@ -154,13 +156,27 @@
             </ul>
           </div>
           <div class="col-md-3">
-            <h3 class="border-end border-4 border-primary pe-3">Posts</h3>
-            <ul class="list-unstyled mt-4">
-              <li><a href="#" class="text-decoration-none" style="color: #ddd;">Vue.js</a></li>
-              <li><a href="#" class="text-decoration-none" style="color: #ddd;">React.js</a></li>
-              <li><a href="#" class="text-decoration-none" style="color: #ddd;">Our team</a></li>
-              <li><a href="#" class="text-decoration-none" style="color: #ddd;">Cantact</a></li>
-            </ul>
+            <h3 class="border-end border-4 border-primary pe-3">با کتاب گیر همراه باشید</h3>
+            <p class="mt-5 lead" style="color: #ddd;">
+              اگر دوست دارید اولین نفری باشید که از جدیدترین اخبار و مطالب ما مطلع می‌شوید، ایمیل خود را وارد کنید!  
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2 class="mb-5 text-center">ثبت نام در خبرنامه وبلاگ کتاب گیر</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }}" {% endif %} role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <form method="POST" action="{% url 'blog:newsletter_signup' %}">
+                        {% csrf_token %}
+                        <input type="email" name="email" class="form-control d-block me-5 " id="email" value="{{form.non_field_errors}}" placeholder="ایمیل">
+                        <button class="btn btn-primary rounded justify-content-center d-flex align-items-center me-5 mt-3" style="width:100px; height:40px;">ثبت نام</button>
+                    </form>
+            {% endif %}
           </div>
         </div>
         <hr>
