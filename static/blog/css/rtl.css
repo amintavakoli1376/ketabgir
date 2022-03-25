@@ -230,3 +230,7 @@ ul ul ul li {
   right:1200px;
   bottom:10px;
 }
+
+.pagination {
+  display: flex;
+}

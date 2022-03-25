@@ -34,11 +34,11 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label d-block">نام</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="message-name">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="message-name" required>
                           </div>
                           <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label d-block">ایمیل</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="message-email">
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="message-email" required>
                           </div>
                           <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label d-block">متن پیام</label>

@@ -12,9 +12,10 @@ from django.core.mail import send_mail , EmailMultiAlternatives
 from django.template.loader import get_template
 from django.conf import settings
 from pathlib import Path
-from .models import  NewsletterUser , Newsletter
+from .models import  NewsletterUser , Newsletter, Contact
 from .forms import NewsletterUserSignUpForm , NewsletterCreationForm
 from django.utils.html import strip_tags
+
 
 
 
@@ -98,13 +99,32 @@ class SearchList(ListView):
         context["search"] = self.request.GET.get('q')
         return context
     
-class AllPosts(ListView):
-    queryset = Article.objects.published()
-    paginate_by = 9
-    template_name = "blog/all_posts.html"
+
+def post_list(request):
+    post_list = Article.objects.all()
+    paginator = Paginator(post_list, 9)
+    page = request.GET.get('page')
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
     
+    index = items.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 5 if index >= 5 else 0
+    end_index = index + 5 if index <= max_index -5 else max_index
+    page_range = paginator.page_range[start_index:end_index]
     
-    
+    context = {
+        "items": items,
+        "page_range": page_range,
+    }
+    template = 'blog/all_posts.html'
+    return render(request, template, context)
+
+   
 def newsletter_signup(request):
     form = NewsletterUserSignUpForm(request.POST or None)
     if form.is_valid():
@@ -182,7 +202,7 @@ def control_newsletter(request):
 
 def control_newsletter_list(request):
     newsletters = Newsletter.objects.all()
-    paginator = Paginator(newsletters, 10)
+    paginator = Paginator(newsletters,10)
     page = request.GET.get('page')
     try:
         items = paginator.page(page)
@@ -247,9 +267,14 @@ def control_newsletter_delete(request, pk):
 
 def contact(request):
     if request.method == "POST":
-        message_name = request.POST['message-name']
-        message_email = request.POST['message-email']
-        message = request.POST['message']
+        contact = Contact()
+        message_name = request.POST.get('message-name')
+        message_email = request.POST.get('message-email')
+        message = request.POST.get('message')
+        contact.message_name = message_name
+        contact.message_email = message_email
+        contact.message = message
+        contact.save()
         
         # send an email
         send_mail(

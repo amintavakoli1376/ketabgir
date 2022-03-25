@@ -15,6 +15,7 @@ import os
 from decouple import config
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'blog.middleware.SaveIPAddressMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -158,12 +160,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media',)
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'account.User'
 
-import environ
+# Sending Email
 
-env = environ.Env()
-environ.Env.read_env()
+
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 # EMAIL_HOST = config('EMAIL_HOST')
 # EMAIL_USE_TLS = True
 # EMAIL_PORT = config('EMAIL_PORT')
