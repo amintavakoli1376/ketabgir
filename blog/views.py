@@ -15,6 +15,9 @@ from pathlib import Path
 from .models import  NewsletterUser , Newsletter, Contact
 from .forms import NewsletterUserSignUpForm , NewsletterCreationForm
 from django.utils.html import strip_tags
+from taggit.models import Tag
+from django.db.models import Count
+
 
 
 
@@ -100,8 +103,12 @@ class SearchList(ListView):
         return context
     
 
-def post_list(request):
+def post_list(request, tag_slug=None):
     post_list = Article.objects.all()
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        post_list = post_list.filter(tags__in=[tag])
+    
     paginator = Paginator(post_list, 9)
     page = request.GET.get('page')
     try:

@@ -16,6 +16,7 @@ urlpatterns = [
     path('search/page/<int:page>', SearchList.as_view() , name='search'),
     path('like/<slug:slug>', LikeView , name='like_post'),
     path('allposts', views.post_list , name='posts'),
+    path('tag/<slug:tag_slug>/', views.post_list , name='posts'),
     path('newsletter/sign_up', newsletter_signup , name='newsletter_signup'),
     path('newsletter/unsubscribe', newsletter_unsubscribe , name='newsletter_unsubscribe'),
     path('contact/', views.contact, name='contact'),

@@ -18,7 +18,7 @@
     <div class="row gx-lg-5 justify-content-center me-5">
         <h2 class="last_title">پست های اخیر</h2>
         <div class="title__sep"></div>
-        <div class="title__btn text-muted mb-3"><a href="{% url 'blog:posts' %}">موارد بیشتر</a></div>
+        <div class="title__btn text-muted mb-3"><a href="{% url 'blog:posts' %}">موارد بیشتر</a></div>   
         <div class="col-md-4 col-lg-8">
             <!-- Post preview-->
             {% block header %}{% endblock header %}
@@ -41,7 +41,7 @@
                                             {% endif %}
                                         </a>
                                         <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
-                                            <a href="{% url 'blog:detail' article.slug %}">بیشتربخوانید...</a>
+                                            <a href="{% url 'blog:detail' article.slug %}">بیشتر بخوانید...</a>
                                         </p>
                                         
                                     </div>

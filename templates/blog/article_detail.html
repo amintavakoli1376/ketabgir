@@ -44,8 +44,15 @@
               {% endif %}
           {% else %}
               {{object.description|safe}}
-          {% endif %} 
-          
+          {% endif %}
+           
+          <!-- Tags -->
+          <h4 class="py-2">تگ ها:</h4>
+          {% for tag in article.tags.all %}
+                <a href="{% url 'blog:posts' tag.slug %}">{{tag.name}}</a> , 
+          {% endfor %}
+          <hr>
+
           {% if user.is_authenticated %}
             <form action="{% url 'blog:like_post' article.slug %}" method="POST">
               {% csrf_token %}

@@ -3,12 +3,21 @@ from ..models import Category ,Article
 from django.db.models import Count, Q
 from datetime import datetime, timedelta
 from django.contrib.contenttypes.models import ContentType
+from ..views import post_list
+
+
 
 register = template.Library()
 
 @register.simple_tag
 def title():
-    return "وبلاگ جنگو"
+    return "وبلاگ کتاب گیر"
+
+
+#این قسمت بدرد پنل ادمین میخورد.تعداد پست هایی که منشتر شده را نشان می دهد
+@register.simple_tag
+def total_posts():
+    return Article.published.count()
 
 
 @register.inclusion_tag("blog/partials/category_navbar.html")
@@ -42,6 +51,7 @@ def last_articles():
         "articles": Article.objects.published().order_by('-publish')[:3],
         "title":"مقالات اخیر"
     }
+
 
 @register.inclusion_tag("registration/partials/link.html")
 def link(request,link_name,content,classes):

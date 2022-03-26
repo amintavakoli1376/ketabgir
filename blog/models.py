@@ -6,6 +6,7 @@ from django.utils import timezone
 from extensions.utils import jalali_converter
 from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
+from taggit.managers import TaggableManager
 
 
 #my managers
@@ -63,6 +64,7 @@ class Article(models.Model):
     comments = GenericRelation(Comment)
     hits = models.ManyToManyField(IPAddress,through="ArticleHit",blank=True,related_name="hits",verbose_name = "بازدیدها")
     likes = models.ManyToManyField(User, related_name="blog_posts")
+    tags = TaggableManager()
     
     def total_likes(self):
         return self.likes.count()
