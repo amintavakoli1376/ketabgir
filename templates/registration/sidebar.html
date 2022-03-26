@@ -53,10 +53,13 @@
                     </li>
                     {% if user.is_superuser %}
                         <li class="nav-item">
-                        {% link request 'control_newsletter' 'ارسال خبرنامه' 'fa-envelope' %}
+                        {% link request 'control_newsletter' 'ارسال خبرنامه' 'fa-keyboard' %}
                         </li>
                         <li class="nav-item">
                         {% link request 'control_newsletter_list' 'لیست خبرنامه ها' 'fa-list' %}
+                        </li>
+                        <li class="nav-item">
+                            {% link request 'control_contact_list' 'پیام کاربران' 'fa-envelope' %}
                         </li>
                     {% endif %}
                 </ul>

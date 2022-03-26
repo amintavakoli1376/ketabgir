@@ -293,16 +293,32 @@ def contact(request):
         contact.message = message
         contact.save()
 
-        # send an email
-        send_mail(
-            message_name,  # subject
-            message,  # message
-            message_email,  # from email
-            ['artdesign.saymodesign@gmail.com'],  # To Email
-
-        )
-
         return render(request, 'blog/contact.html', {'message_name': message_name})
 
     else:
         return render(request, 'blog/contact.html', {})
+
+
+def control_contact_list(request):
+    contact = Contact.objects.all()
+    paginator = Paginator(contact, 10)
+    page = request.GET.get('page')
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+
+    index = items.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 5 if index >= 5 else 0
+    end_index = index + 5 if index <= max_index - 5 else max_index
+    page_range = paginator.page_range[start_index:end_index]
+
+    context = {
+        "items": items,
+        "page_range": page_range,
+    }
+    template = 'registration/control_contact_list.html'
+    return render(request, template, context)
