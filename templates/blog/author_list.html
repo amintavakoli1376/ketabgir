@@ -1,13 +1,51 @@
-{% extends 'blog/list.html' %}
+{% extends 'blog/all_posts.html' %}
+{% load static %}
+{% load humanize %}
 
-{% block header %}
-    <h3 class="alert alert-primary text-center">نویسنده: {{author.get_full_name}}</h3>
-{% endblock header %}
+{% block author %}
 
-{% block previous_page_url %}
-    {% url 'blog:author' author.username page_obj.previous_page_number %}
-{% endblock %}
+            <!-- Post preview-->
+            {% block header %}
+            <h3 class="alert alert-primary text-center">نویسنده: {{author.get_full_name}}</h3>
+            {% endblock header %}
+           <div class="py-4">
+                <main>
+                    <div class="row">
+                        {% for article in author.articles.published %}
+                            <div class="col-lg-4 rounded post-preview" style="max-width:100%; height:auto;">
+                                <div class="card mb-3" style="width:250px; height:650px;">
+                                    <a href="{% url 'blog:detail' article.slug %}">
+                                        <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
+                                    </a>
+                                        <div class="card-body">
+                                        <a href="{% url 'blog:detail' article.slug %}">
+                                            <h4 class="card-title mb-4">{{article.title}}</h4>
+                                            {% if article.is_special %}
+                                                <span style="font-size:14px;color:red;">ویژه</span>
+                                            {% endif %}
+                                        </a>
+                                        <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
+                                            <a href="{% url 'blog:detail' article.slug %}">بیشتر بخوانید...</a>
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="mb-3 me-3">
+                                        {% for cat in article.category.active %}
+                                            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="card-footer">
+                                    <small class="text-muted">{{article.publish|naturaltime}}</small>
+                                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p>محتوایی برای نمایش وجود ندارد.</p>
+                        {% endfor %}
+                    </div>
+                </main> 
+            </div>
 
-{% block next_page_url %}
-    {% url 'blog:author' author.username page_obj.next_page_number %}
-{% endblock %}
+
+{% endblock author %}

@@ -7,12 +7,15 @@
     <div class="row gx-lg-5 justify-content-center me-5">
         <div class="col-md-4 col-lg-8">
             <!-- Post preview-->
-            {% block header %}{% endblock header %}
 
-           <h2 class="text-center text-muted display-5 mt-5 py-4">پست ها</h2>
+            <h2 class="text-center text-muted display-5 mt-5 py-4">پست ها</h2>
+
+           
            <div class="py-4">
                 <main>
                     <div class="row">
+                        {% block category %}{% endblock category %}
+                        {% block author %}{% endblock author %}
                         {% for item in items %}
                             <div class="col-lg-4 rounded post-preview" style="max-width:100%; height:auto;">
                                 <div class="card mb-3" style="width:250px; height:650px;">
@@ -31,16 +34,20 @@
                                         </p>
                                         
                                     </div>
-                                    
+                                    <div class="mb-3 me-3">
+                                        {% for cat in item.category.active %}
+                                            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+                                        {% endfor %}
+                                    </div>
                                     <div class="card-footer">
                                     <small class="text-muted">{{item.publish|naturaltime}}</small>
                                     <a href="{% url 'blog:author' item.author %}">{{item.author.get_full_name}}</a>
                                     </div>
                                 </div>
                             </div>
-                        {% empty %}
-                            <p>محتوایی برای نمایش وجود ندارد.</p>
+                            
                         {% endfor %}
+                        
                         <!-- Pagination -->
                         {% if items.has_other_pages %}
                             <div class="col-12 pagination-set">

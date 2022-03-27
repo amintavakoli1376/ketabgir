@@ -1,17 +1,87 @@
-{% extends 'blog/list.html' %}
+{% extends 'blog/all_posts.html' %}
 {% load static %}
+{% load humanize %}
+
+{% block category %}
+
+            <!-- Post preview-->
+            {% block header %}
+            <h3 class="alert alert-primary text-center">دسته بندی: {{category.title}}</h3>
+            {% endblock header %}
+
+           
+           <div class="py-4">
+                <main>
+                    <div class="row">
+                        {% for article in category.articles.all %}
+                            <div class="col-lg-4 rounded post-preview" style="max-width:100%; height:auto;">
+                                <div class="card mb-3" style="width:250px; height:650px;">
+                                    <a href="{% url 'blog:detail' article.slug %}">
+                                        <img src="{{article.thumbnail.url}}" class="card-img-top px-4 py-1 mt-1 rounded" alt="...">
+                                    </a>
+                                        <div class="card-body">
+                                        <a href="{% url 'blog:detail' article.slug %}">
+                                            <h4 class="card-title mb-4">{{article.title}}</h4>
+                                            {% if article.is_special %}
+                                                <span style="font-size:14px;color:red;">ویژه</span>
+                                            {% endif %}
+                                        </a>
+                                        <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
+                                            <a href="{% url 'blog:detail' article.slug %}">بیشتر بخوانید...</a>
+                                        </p>
+                                        
+                                    </div>
+                                    <div class="mb-3 me-3">
+                                        {% for cat in article.category.active %}
+                                            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="card-footer">
+                                    <small class="text-muted">{{article.publish|naturaltime}}</small>
+                                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p>محتوایی برای نمایش وجود ندارد.</p>
+                        {% endfor %}
+                        <!-- Pagination -->
+                        <!-- {% if items.has_other_pages %}
+                            <div class="col-12 pagination-set">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        {% if items.has_previous %}
+                                            <li class="page-item">
+                                                <a href="?page={{ items.previous_page_number }}" class="page-link"><<</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link"><span><<</span></a>
+                                            </li>
+                                        {% endif %}
+                                        {% for i in page_range %}
+                                            {% if items.number == i %}
+                                                <li class="page-item active"><a class="page-link" href="#">{{i}}<span class="sr-only">(current)</span></a></li>
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>    
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if items.has_next %}
+                                            <li class="page-item">
+                                                <a href="?page={{ items.next_page_number }}" class="page-link">>></a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link"><span>>></span></a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {% endif %} -->
+                    </div>
+                </main> 
+            </div>
 
 
-
-
-{% block header %}
-    <h3 class="alert alert-primary text-center">دسته بندی: {{category.title}}</h3>
-{% endblock header %}
-
-{% block previous_page_url %}
-    {% url 'blog:category' category.slug page_obj.previous_page_number %}
-{% endblock %}
-
-{% block next_page_url %}
-    {% url 'blog:category' category.slug page_obj.next_page_number %}
-{% endblock %}
+{% endblock category %}

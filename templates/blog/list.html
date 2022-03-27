@@ -43,9 +43,12 @@
                                         <p class="card-text">{{article.description|safe|striptags|truncatewords:20|slice:"-2"}}
                                             <a href="{% url 'blog:detail' article.slug %}">بیشتر بخوانید...</a>
                                         </p>
-                                        
                                     </div>
-                                    
+                                    <div class="mb-3 me-3">
+                                        {% for cat in article.category.active %}
+                                            <a href="{% url 'blog:category' cat.slug %}">#{{cat.title}}</a>
+                                        {% endfor %}
+                                    </div>
                                     <div class="card-footer">
                                     <small class="text-muted">{{article.publish|naturaltime}}</small>
                                     <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
